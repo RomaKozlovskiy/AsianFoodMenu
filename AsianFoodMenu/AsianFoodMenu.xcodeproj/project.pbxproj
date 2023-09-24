@@ -24,6 +24,7 @@
 		4EE848932AC03FDC00FBA4B5 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE848922AC03FDC00FBA4B5 /* TabBarController.swift */; };
 		4EE848952AC0405800FBA4B5 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE848942AC0405800FBA4B5 /* SecondViewController.swift */; };
 		4EE848972AC0406300FBA4B5 /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE848962AC0406300FBA4B5 /* ThirdViewController.swift */; };
+		4EE8489A2AC05DA100FBA4B5 /* Extension + UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE848992AC05DA100FBA4B5 /* Extension + UIViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		4EE848922AC03FDC00FBA4B5 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		4EE848942AC0405800FBA4B5 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		4EE848962AC0406300FBA4B5 /* ThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
+		4EE848992AC05DA100FBA4B5 /* Extension + UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIViewController.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 				4E6501542ABC64C600D0FD22 /* Models */,
 				4E6501552ABC64EC00D0FD22 /* NetworkingService */,
 				4E6501532ABC643D00D0FD22 /* ViewControllers */,
+				4EE848982AC05D7700FBA4B5 /* Extensions */,
 				4E6501562ABC653400D0FD22 /* Views */,
 				4E18149B2ABDA5A600EE2A3C /* ConfigUrl */,
 				4E6501522ABC63E200D0FD22 /* Resources */,
@@ -180,6 +183,14 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		4EE848982AC05D7700FBA4B5 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4EE848992AC05DA100FBA4B5 /* Extension + UIViewController.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -260,6 +271,7 @@
 				4EE848972AC0406300FBA4B5 /* ThirdViewController.swift in Sources */,
 				4EB003882ABF7E10000D270D /* SubMenuProvider.swift in Sources */,
 				4E1814A42ABDF56800EE2A3C /* SubMenu.swift in Sources */,
+				4EE8489A2AC05DA100FBA4B5 /* Extension + UIViewController.swift in Sources */,
 				4EB003802ABF7513000D270D /* MenuRouter.swift in Sources */,
 				4EB003862ABF7E06000D270D /* SubMenuRouter.swift in Sources */,
 				4EB003822ABF751C000D270D /* MenuProvider.swift in Sources */,
