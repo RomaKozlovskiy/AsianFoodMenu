@@ -21,6 +21,9 @@
 		4EB003822ABF751C000D270D /* MenuProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB003812ABF751C000D270D /* MenuProvider.swift */; };
 		4EB003862ABF7E06000D270D /* SubMenuRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB003852ABF7E06000D270D /* SubMenuRouter.swift */; };
 		4EB003882ABF7E10000D270D /* SubMenuProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB003872ABF7E10000D270D /* SubMenuProvider.swift */; };
+		4EE848932AC03FDC00FBA4B5 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE848922AC03FDC00FBA4B5 /* TabBarController.swift */; };
+		4EE848952AC0405800FBA4B5 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE848942AC0405800FBA4B5 /* SecondViewController.swift */; };
+		4EE848972AC0406300FBA4B5 /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE848962AC0406300FBA4B5 /* ThirdViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +43,9 @@
 		4EB003812ABF751C000D270D /* MenuProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuProvider.swift; sourceTree = "<group>"; };
 		4EB003852ABF7E06000D270D /* SubMenuRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubMenuRouter.swift; sourceTree = "<group>"; };
 		4EB003872ABF7E10000D270D /* SubMenuProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubMenuProvider.swift; sourceTree = "<group>"; };
+		4EE848922AC03FDC00FBA4B5 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		4EE848942AC0405800FBA4B5 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		4EE848962AC0406300FBA4B5 /* ThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				4E6501512ABC63BD00D0FD22 /* App */,
+				4EE848912AC03FBE00FBA4B5 /* Common */,
 				4E6501542ABC64C600D0FD22 /* Models */,
 				4E6501552ABC64EC00D0FD22 /* NetworkingService */,
 				4E6501532ABC643D00D0FD22 /* ViewControllers */,
@@ -114,6 +121,8 @@
 			isa = PBXGroup;
 			children = (
 				4E6501412ABC5C2C00D0FD22 /* MenuViewController.swift */,
+				4EE848942AC0405800FBA4B5 /* SecondViewController.swift */,
+				4EE848962AC0406300FBA4B5 /* ThirdViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -161,6 +170,14 @@
 				4EB003872ABF7E10000D270D /* SubMenuProvider.swift */,
 			);
 			path = SubMenuNetwork;
+			sourceTree = "<group>";
+		};
+		4EE848912AC03FBE00FBA4B5 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				4EE848922AC03FDC00FBA4B5 /* TabBarController.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,10 +251,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E6501422ABC5C2C00D0FD22 /* MenuViewController.swift in Sources */,
+				4EE848932AC03FDC00FBA4B5 /* TabBarController.swift in Sources */,
 				4E65013E2ABC5C2C00D0FD22 /* AppDelegate.swift in Sources */,
 				4E6501582ABC69F900D0FD22 /* Config.swift in Sources */,
+				4EE848952AC0405800FBA4B5 /* SecondViewController.swift in Sources */,
 				4E6501402ABC5C2C00D0FD22 /* SceneDelegate.swift in Sources */,
 				4E65015C2ABCE0C000D0FD22 /* Provider.swift in Sources */,
+				4EE848972AC0406300FBA4B5 /* ThirdViewController.swift in Sources */,
 				4EB003882ABF7E10000D270D /* SubMenuProvider.swift in Sources */,
 				4E1814A42ABDF56800EE2A3C /* SubMenu.swift in Sources */,
 				4EB003802ABF7513000D270D /* MenuRouter.swift in Sources */,
