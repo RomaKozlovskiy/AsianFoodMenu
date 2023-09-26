@@ -75,6 +75,8 @@ private extension MenuCollectionViewCell {
         result.backgroundColor = #colorLiteral(red: 0.5411763787, green: 0.5411765575, blue: 0.5454813838, alpha: 1)
         result.contentMode = .scaleAspectFill
         result.clipsToBounds = true
+        result.layer.cornerRadius = 10
+        result.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         result.translatesAutoresizingMaskIntoConstraints = false
         return result
     }
