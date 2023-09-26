@@ -5,7 +5,7 @@
 //  Created by Роман Козловский on 21.09.2023.
 //
 
-import Foundation
+import UIKit
 
 class Provider {
 
@@ -25,6 +25,24 @@ class Provider {
         
         let (data, _) = try await URLSession.shared.data(for: request)
         return data
+    }
+    
+    func fetchFoodImage(at stringUrl: String) async throws -> UIImage {
+        guard let baseStringUrl = Config.baseStringUrl else {
+            throw RequestProcessorError.invalidBaseStringURL }
+        
+        let imageStringUrl = baseStringUrl + stringUrl
+        
+        guard let imageUrl = URL(string: imageStringUrl) else {
+            throw RequestProcessorError.wrongUrl(URL(string: imageStringUrl))
+        }
+        
+        let (data, _) = try await URLSession.shared.data(from: imageUrl)
+        
+        guard let image = UIImage(data: data) else {
+            throw RequestProcessorError.failedToDecodeJSON
+        }
+        return image
     }
   
     // MARK: - Decode
@@ -62,8 +80,9 @@ class Provider {
 
 // MARK: - RequestProcessorError
 
-private enum RequestProcessorError: Error {
-    case wrongUrl(URL?)
+enum RequestProcessorError: Error {
+    case invalidBaseStringURL
+    case wrongUrl(URL?) // todo
     case failedToDecodeJSON
 }
 

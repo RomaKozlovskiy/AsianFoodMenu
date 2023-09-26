@@ -9,6 +9,9 @@ import UIKit
 
 class MenuCollectionView: UICollectionView {
         
+    let menuProvider = MenuProvider()
+    var menuList: Menu?
+    
     init() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -42,6 +45,16 @@ class MenuCollectionView: UICollectionView {
     @objc private func cartButton() {
         
     }
+    
+    private func fetchMenu() async -> Menu?  {
+        do {
+            let menu = try await menuProvider.fetchMenu()
+                return menu
+        } catch {
+            print(error.localizedDescription)
+        }
+        return nil
+    }
 }
 
 
@@ -55,9 +68,26 @@ extension MenuCollectionView: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuCollectionViewCell.reuseId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuCollectionViewCell.reuseId, for: indexPath) as! MenuCollectionViewCell
+        
+        Task {
+            let menu = try await menuProvider.fetchMenu()
+            menuList = menu
+            let dish = menu?.menuList[indexPath.row]
+            let image = try await menuProvider.fetchFoodImage(at: dish?.image ?? "")
+            await MainActor.run {
+                cell.foodNameLabel.text = dish?.name
+                cell.foodCountLabel.text = "\(dish?.subMenuCount ?? 0) товаров"
+                cell.menuImageView.image = image
+            }
+        }
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(menuList?.menuList[indexPath.row].menuID)
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

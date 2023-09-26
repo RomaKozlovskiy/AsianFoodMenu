@@ -13,9 +13,9 @@ class MenuCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Private lazy properties
     
-    private lazy var menuImageView: UIImageView = _menuImageView
-    private lazy var foodNameLabel: UILabel = _foodName
-    private lazy var foodCountLabel: UILabel = _foodCount
+    lazy var menuImageView: UIImageView = _menuImageView
+    lazy var foodNameLabel: UILabel = _foodName
+    lazy var foodCountLabel: UILabel = _foodCount
     
     // MARK: - init
     
@@ -38,7 +38,7 @@ class MenuCollectionViewCell: UICollectionViewCell {
         
         backgroundColor = #colorLiteral(red: 0.2579315901, green: 0.2629087567, blue: 0.2671231627, alpha: 1)
         layer.cornerRadius = 10
-        clipsToBounds = true
+        clipsToBounds = false
     }
     
     private func addSubviews() {
@@ -55,14 +55,14 @@ class MenuCollectionViewCell: UICollectionViewCell {
             menuImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
             menuImageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 1/2),
             
-            foodNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            foodNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+            foodNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
+            foodNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
             foodNameLabel.topAnchor.constraint(equalTo: menuImageView.bottomAnchor, constant: 10),
-            
+            foodNameLabel.heightAnchor.constraint(equalToConstant: 37),
             
             foodCountLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             foodCountLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
-            foodCountLabel.topAnchor.constraint(equalTo: foodNameLabel.bottomAnchor, constant: 5)
+            foodCountLabel.topAnchor.constraint(equalTo: foodNameLabel.bottomAnchor)
             
         ])
     }
@@ -72,9 +72,9 @@ private extension MenuCollectionViewCell {
     
     var _menuImageView : UIImageView {
         let result = UIImageView()
-        result.backgroundColor = .white
-        result.contentMode = .scaleAspectFit
-        result.image = UIImage(named: "logo")
+        result.backgroundColor = #colorLiteral(red: 0.5411763787, green: 0.5411765575, blue: 0.5454813838, alpha: 1)
+        result.contentMode = .scaleAspectFill
+        result.clipsToBounds = true
         result.translatesAutoresizingMaskIntoConstraints = false
         return result
     }
@@ -82,8 +82,9 @@ private extension MenuCollectionViewCell {
     var _foodName: UILabel {
         let result = UILabel(frame: .zero)
         result.textColor = .white
-        result.text = "Суши"
         result.font = UIFont.boldSystemFont(ofSize: 18)
+        result.numberOfLines = 2
+        result.adjustsFontSizeToFitWidth = true
         result.textAlignment = .center
         result.translatesAutoresizingMaskIntoConstraints = false
         return result
