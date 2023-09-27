@@ -9,6 +9,9 @@ import UIKit
 
 class SubMenuCollectionView: UICollectionView {
 
+    private let subMenuProvider = SubMenuProvider()
+    private var subMenu: SubMenu?
+    
     init() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -39,6 +42,16 @@ class SubMenuCollectionView: UICollectionView {
         translatesAutoresizingMaskIntoConstraints = false
         register(SubMenuCollectionViewCell.self, forCellWithReuseIdentifier: SubMenuCollectionViewCell.reuseID)
     }
+    
+    private func fetchSubMenu(by id: String) async {
+        do {
+            let subMenu = try await subMenuProvider.fetchSubMenu(by: id)
+            self.subMenu = subMenu
+            self.reloadData()
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
 
 }
 
@@ -46,11 +59,15 @@ class SubMenuCollectionView: UICollectionView {
 
 extension SubMenuCollectionView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        8
+        subMenu?.menuList.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SubMenuCollectionViewCell.reuseID, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SubMenuCollectionViewCell.reuseID, for: indexPath) as! SubMenuCollectionViewCell
+        if let subMenu = subMenu?.menuList[indexPath.row] {
+            cell.setupWith(subMenuList: subMenu)
+            return cell
+        }
         return cell
     }
     
@@ -61,4 +78,15 @@ extension SubMenuCollectionView: UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         55
     }
+}
+
+extension SubMenuCollectionView: MenuCollectionViewDelegate {
+
+    func fetchSubMenu(from menu: Menu, at index: Int) {
+        let id = menu.menuList[index].menuID
+        print(id)
+        Task {
+            await fetchSubMenu(by: id)
+        }
+    }   
 }

@@ -19,9 +19,9 @@ class MenuViewController: UIViewController {
         addSubviews()
         applyConstraints()
         setupNavigationItem()
-        
+        menuCollectionView.menuDelegate = subMenuCollectionView
     }
-    
+
     // MARK: - Private Methods
     
     private func addSubviews() {

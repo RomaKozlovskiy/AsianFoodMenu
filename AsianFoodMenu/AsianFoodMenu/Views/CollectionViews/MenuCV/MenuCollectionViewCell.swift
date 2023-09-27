@@ -37,6 +37,8 @@ class MenuCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Public properties
+    
     func setupWith(menuList: MenuList) {
         Task {
             let image = await setImage(from: menuList)

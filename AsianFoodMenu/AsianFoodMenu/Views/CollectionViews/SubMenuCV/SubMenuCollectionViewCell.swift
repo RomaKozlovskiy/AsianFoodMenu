@@ -9,7 +9,15 @@ import UIKit
 
 class SubMenuCollectionViewCell: UICollectionViewCell {
     
+    static var reuseID: String {
+        get {
+            "SubMenuCollectionViewCell"
+        }
+    }
+    
     // MARK: - Private lazy properties
+    
+    private let subMenuProvider = SubMenuProvider()
     
     private lazy var subMenuImageView: UIImageView = _subMenuImageView
     private lazy var foodNameTitle: UILabel = _foodNameTitle
@@ -17,8 +25,6 @@ class SubMenuCollectionViewCell: UICollectionViewCell {
     private lazy var foodPrice: UILabel = _foodPrice
     private lazy var spicyImageView: UIImageView = _spicyImageView
     private lazy var addToCartButton: UIButton = _addToCartButton
-    
-    static let reuseID = "SubMenuCollectionViewCell"
     
     // MARK: - init
     
@@ -34,14 +40,25 @@ class SubMenuCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    // MARK: - Public properties
     
-    // MARK: - Override methods
-    
-    override func layoutSubviews() {
-       // setBottomCornersRadius()
+    func setupWith(subMenuList: SubMenuList) {
+        Task {
+            let image = await setImage(from: subMenuList)
+            await MainActor.run{
+                subMenuImageView.image = image
+            }
+            foodNameTitle.text = subMenuList.name
+            foodNameSubtitle.text = subMenuList.content
+            foodPrice.text = subMenuList.price
+            if subMenuList.spicy != nil {
+                spicyImageView.isHidden = false
+            } else {
+                spicyImageView.isHidden = true
+            }
+        }
     }
     
-  
     // MARK: - Private Methods
     
     private func configureSelf() {
@@ -90,6 +107,17 @@ class SubMenuCollectionViewCell: UICollectionViewCell {
             addToCartButton.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
     }
+    
+    private func setImage(from subMenuList: SubMenuList) async -> UIImage? {
+        do {
+            let imageUrl = subMenuList.image
+            let image = try await subMenuProvider.fetchFoodImage(from: imageUrl)
+            return image
+        } catch {
+            print(error.localizedDescription)
+        }
+        return nil
+    }
   
     @objc private func cartButton() {
         print(#function)
@@ -103,10 +131,10 @@ private extension SubMenuCollectionViewCell {
     var _subMenuImageView : UIImageView {
         let result = UIImageView()
         result.backgroundColor = .yellow
-        result.contentMode = .scaleAspectFit
+        result.contentMode = .scaleAspectFill
         result.image = UIImage(named: "logo")
         result.clipsToBounds = true
-        result.layer.masksToBounds = false
+       // result.layer.masksToBounds = false
         result.layer.cornerRadius = 10
         result.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         result.translatesAutoresizingMaskIntoConstraints = false

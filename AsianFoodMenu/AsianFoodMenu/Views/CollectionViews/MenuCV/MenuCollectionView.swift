@@ -7,10 +7,15 @@
 
 import UIKit
 
+protocol MenuCollectionViewDelegate: AnyObject {
+    func fetchSubMenu(from menu: Menu, at index: Int)
+}
+
 class MenuCollectionView: UICollectionView {
+    weak var menuDelegate: MenuCollectionViewDelegate?
     
     // MARK: - Private properties
-    
+    let subMenuCV = SubMenuCollectionView()
     private let menuProvider = MenuProvider()
     private var menu: Menu?
     
@@ -33,7 +38,7 @@ class MenuCollectionView: UICollectionView {
         showsVerticalScrollIndicator = false
         
         Task {
-            await fetchData()
+            await fetchMenu()
         }
     }
     
@@ -51,10 +56,11 @@ class MenuCollectionView: UICollectionView {
         register(MenuCollectionViewCell.self, forCellWithReuseIdentifier: MenuCollectionViewCell.reuseId)
     }
     
-    private func fetchData() async {
+    private func fetchMenu() async {
         do {
             let menu = try await menuProvider.fetchMenu()
             self.menu = menu
+            menuDelegate?.fetchSubMenu(from: menu!, at: 0)
             self.reloadData()
         } catch {
             print(error.localizedDescription)
@@ -80,6 +86,9 @@ extension MenuCollectionView: UICollectionViewDelegate, UICollectionViewDataSour
             return cell
         }
         return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        menuDelegate?.fetchSubMenu(from: menu!, at: indexPath.row)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
