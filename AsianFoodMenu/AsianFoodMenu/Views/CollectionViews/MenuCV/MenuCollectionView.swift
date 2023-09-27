@@ -8,14 +8,17 @@
 import UIKit
 
 class MenuCollectionView: UICollectionView {
-        
-    let menuProvider = MenuProvider()
-    var menuList: Menu?
+    
+    // MARK: - Private properties
+    
+    private let menuProvider = MenuProvider()
+    private var menu: Menu?
+    
+    // MARK: - init
     
     init() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        
         super.init(frame: .zero, collectionViewLayout: layout)
         
         setupSelf()
@@ -28,11 +31,17 @@ class MenuCollectionView: UICollectionView {
         )
         showsHorizontalScrollIndicator = false
         showsVerticalScrollIndicator = false
+        
+        Task {
+            await fetchData()
+        }
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Private Methods
     
     private func setupSelf() {
         backgroundColor = #colorLiteral(red: 0.1411764324, green: 0.1411764324, blue: 0.1411764324, alpha: 1)
@@ -42,52 +51,35 @@ class MenuCollectionView: UICollectionView {
         register(MenuCollectionViewCell.self, forCellWithReuseIdentifier: MenuCollectionViewCell.reuseId)
     }
     
-    @objc private func cartButton() {
-        
-    }
-    
-    private func fetchMenu() async -> Menu?  {
+    private func fetchData() async {
         do {
             let menu = try await menuProvider.fetchMenu()
-                return menu
+            self.menu = menu
+            self.reloadData()
         } catch {
             print(error.localizedDescription)
         }
-        return nil
     }
 }
-
-
 
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 
 extension MenuCollectionView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        7
+        menu?.menuList.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuCollectionViewCell.reuseId, for: indexPath) as! MenuCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: MenuCollectionViewCell.reuseId,
+            for: indexPath) as! MenuCollectionViewCell
         
-        Task {
-            let menu = try await menuProvider.fetchMenu()
-            menuList = menu
-            let dish = menu?.menuList[indexPath.row]
-            let image = try await menuProvider.fetchFoodImage(at: dish?.image ?? "")
-            await MainActor.run {
-                cell.foodNameLabel.text = dish?.name
-                cell.foodCountLabel.text = "\(dish?.subMenuCount ?? 0) товаров"
-                cell.menuImageView.image = image
-            }
+        if let menuList = menu?.menuList[indexPath.row] {
+            cell.setupWith(menuList: menuList)
+            return cell
         }
-        
         return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(menuList?.menuList[indexPath.row].menuID)
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

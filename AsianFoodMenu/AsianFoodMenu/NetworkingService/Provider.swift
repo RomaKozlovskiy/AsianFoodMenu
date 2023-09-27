@@ -27,7 +27,7 @@ class Provider {
         return data
     }
     
-    func fetchFoodImage(at stringUrl: String) async throws -> UIImage {
+    func fetchFoodImage(from stringUrl: String) async throws -> UIImage {
         guard let baseStringUrl = Config.baseStringUrl else {
             throw RequestProcessorError.invalidBaseStringURL }
         
