@@ -85,13 +85,3 @@ enum RequestProcessorError: Error {
     case wrongUrl(URL?) // todo
     case failedToDecodeJSON
 }
-
-// MARK: - Extension Data
-
-extension Data {
-    mutating func append(_ string: String) {
-        if let data = string.data(using: .utf8) {
-            append(data)
-        }
-    }
-}
