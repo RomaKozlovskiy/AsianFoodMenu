@@ -23,6 +23,19 @@ class MenuCollectionViewCell: UICollectionViewCell {
     private lazy var foodNameLabel: UILabel = _foodName
     private lazy var foodCountLabel: UILabel = _foodCount
     
+    // MARK: - Override properties
+    
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                backgroundColor = #colorLiteral(red: 0.274024725, green: 0.3874692917, blue: 1, alpha: 1)
+            } else {
+                backgroundColor = #colorLiteral(red: 0.2579315901, green: 0.2629087567, blue: 0.2671231627, alpha: 1)
+            }
+        }
+    }
+    
+    
     // MARK: - init
     
     override init(frame: CGRect) {
