@@ -8,11 +8,16 @@
 import UIKit
 
 protocol MenuCollectionViewDelegate: AnyObject {
+    func fetchFoodName(from menu: Menu, at index: Int)
+}
+
+protocol MenuCollectionViewSubMenuDelegate: AnyObject {
     func fetchSubMenu(from menu: Menu, at index: Int)
 }
 
 class MenuCollectionView: UICollectionView {
     weak var menuDelegate: MenuCollectionViewDelegate?
+    weak var subMenuDelegate: MenuCollectionViewSubMenuDelegate?
     
     // MARK: - Private properties
     let subMenuCV = SubMenuCollectionView()
@@ -60,7 +65,10 @@ class MenuCollectionView: UICollectionView {
         do {
             let menu = try await menuProvider.fetchMenu()
             self.menu = menu
-            menuDelegate?.fetchSubMenu(from: menu!, at: 0)
+            if let menu = menu {
+                subMenuDelegate?.fetchSubMenu(from: menu, at: 0)
+                menuDelegate?.fetchFoodName(from: menu, at: 0)
+            }
             self.reloadData()
         } catch {
             print(error.localizedDescription)
@@ -88,7 +96,9 @@ extension MenuCollectionView: UICollectionViewDelegate, UICollectionViewDataSour
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        menuDelegate?.fetchSubMenu(from: menu!, at: indexPath.row)
+        guard let menu = menu else { return }
+        subMenuDelegate?.fetchSubMenu(from: menu, at: indexPath.row)
+        menuDelegate?.fetchFoodName(from: menu, at: indexPath.row)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

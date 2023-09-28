@@ -19,7 +19,8 @@ class MenuViewController: UIViewController {
         addSubviews()
         applyConstraints()
         setupNavigationItem()
-        menuCollectionView.menuDelegate = subMenuCollectionView
+        menuCollectionView.subMenuDelegate = subMenuCollectionView
+        menuCollectionView.menuDelegate = self
     }
 
     // MARK: - Private Methods
@@ -39,7 +40,7 @@ class MenuViewController: UIViewController {
             
             foodNameLabel.topAnchor.constraint(equalTo: menuCollectionView.bottomAnchor, constant: 20),
             foodNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.leftDistanceToView),
-            foodNameLabel.trailingAnchor.constraint(equalTo: view.centerXAnchor),
+            foodNameLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.rightDistanceToView),
             
             subMenuCollectionView.topAnchor.constraint(equalTo: foodNameLabel.bottomAnchor, constant: 10),
             subMenuCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -70,15 +71,22 @@ class MenuViewController: UIViewController {
 private extension MenuViewController {
     var _foodNameLabel: UILabel {
         let result = UILabel()
-        result.text = "Суши"
         result.font = UIFont.boldSystemFont(ofSize: 30)
         result.textColor = .white
+        result.numberOfLines = 1
+        result.adjustsFontSizeToFitWidth = true
         result.translatesAutoresizingMaskIntoConstraints = false
         return result
     }
 }
 
-
+extension MenuViewController: MenuCollectionViewDelegate {
+    func fetchFoodName(from menu: Menu, at index: Int) {
+        let foodName = menu.menuList[index].name
+        foodNameLabel.text = foodName
+    }
+ 
+}
 
 
 

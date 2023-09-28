@@ -80,7 +80,7 @@ extension SubMenuCollectionView: UICollectionViewDelegate, UICollectionViewDataS
     }
 }
 
-extension SubMenuCollectionView: MenuCollectionViewDelegate {
+extension SubMenuCollectionView: MenuCollectionViewSubMenuDelegate {
 
     func fetchSubMenu(from menu: Menu, at index: Int) {
         let id = menu.menuList[index].menuID
