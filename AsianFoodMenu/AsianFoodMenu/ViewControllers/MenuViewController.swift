@@ -42,7 +42,7 @@ class MenuViewController: UIViewController {
             foodNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.leftDistanceToView),
             foodNameLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.rightDistanceToView),
             
-            subMenuCollectionView.topAnchor.constraint(equalTo: foodNameLabel.bottomAnchor, constant: 10),
+            subMenuCollectionView.topAnchor.constraint(equalTo: foodNameLabel.bottomAnchor, constant: 5),
             subMenuCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             subMenuCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             subMenuCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)

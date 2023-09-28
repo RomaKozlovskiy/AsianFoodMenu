@@ -91,17 +91,17 @@ class SubMenuCollectionViewCell: UICollectionViewCell {
             foodNameSubtitle.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
             foodNameSubtitle.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
             
-            foodPrice.bottomAnchor.constraint(equalTo: subMenuImageView.topAnchor, constant: -10),
+            foodPrice.bottomAnchor.constraint(equalTo: subMenuImageView.topAnchor, constant: -5),
             foodPrice.leadingAnchor.constraint(equalTo: leadingAnchor),
             foodPrice.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
             foodPrice.heightAnchor.constraint(equalToConstant: 20),
             
-            spicyImageView.centerYAnchor.constraint(equalTo: subMenuImageView.topAnchor, constant: -20),
+            spicyImageView.centerYAnchor.constraint(equalTo: subMenuImageView.topAnchor, constant: -15),
             spicyImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
             spicyImageView.heightAnchor.constraint(equalToConstant: 40),
             spicyImageView.widthAnchor.constraint(equalToConstant: 40),
             
-            addToCartButton.topAnchor.constraint(equalTo: bottomAnchor, constant: -20),
+            addToCartButton.topAnchor.constraint(equalTo: bottomAnchor, constant: -25),
             addToCartButton.heightAnchor.constraint(equalToConstant: 50),
             addToCartButton.widthAnchor.constraint(equalToConstant: frame.width - 30),
             addToCartButton.centerXAnchor.constraint(equalTo: centerXAnchor)
@@ -123,8 +123,8 @@ class SubMenuCollectionViewCell: UICollectionViewCell {
         
         let rootString = NSMutableAttributedString()
         
-        let priceAttributes: [NSAttributedString.Key: Any] = [.font: UIFont.boldSystemFont(ofSize: 20), .foregroundColor: UIColor.white]
-        let weightAttributes: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: 15), .foregroundColor: UIColor.gray]
+        let priceAttributes: [NSAttributedString.Key: Any] = [.font: UIFont.boldSystemFont(ofSize: 18), .foregroundColor: UIColor.white]
+        let weightAttributes: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: 13), .foregroundColor: UIColor.gray]
         
         let doublePrice = Double(price ?? "")
         let strRoundedPice = String(format: "%.f", doublePrice ?? 0)
@@ -185,8 +185,6 @@ private extension SubMenuCollectionViewCell {
     var _foodPrice: UILabel {
         let result = UILabel()
         result.textColor = .white
-        result.textAlignment = .center
-        result.font = UIFont.boldSystemFont(ofSize: 18)
         result.textAlignment = .center
         result.clipsToBounds = true
         result.translatesAutoresizingMaskIntoConstraints = false

@@ -27,7 +27,7 @@ class SubMenuCollectionView: UICollectionView {
         )
         showsHorizontalScrollIndicator = false
         showsVerticalScrollIndicator = false
-        contentInset = UIEdgeInsets(top: 10, left: Constants.leftDistanceToView, bottom: 20, right: Constants.rightDistanceToView)
+        contentInset = UIEdgeInsets(top: 10, left: Constants.leftDistanceToView, bottom: 30, right: Constants.rightDistanceToView)
     }
     
     
