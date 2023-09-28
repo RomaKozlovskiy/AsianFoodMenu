@@ -9,10 +9,10 @@ import Foundation
 
 struct Config {
   
-    private let baseStringUrl = Bundle.main.infoDictionary![Key.baseUrl.rawValue] as? String
+    static let baseStringUrl = Bundle.main.infoDictionary![Key.baseUrl.rawValue] as? String
    
      var baseUrl: URLComponents? {
-        if let baseStringUrl = baseStringUrl {
+         if let baseStringUrl = Config.baseStringUrl {
             let baseUrl = URLComponents(string: baseStringUrl)
             return baseUrl
         }

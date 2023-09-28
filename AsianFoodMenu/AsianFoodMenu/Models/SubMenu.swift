@@ -13,11 +13,11 @@ struct SubMenu: Decodable {
 }
 
 struct SubMenuList: Decodable {
-   let id: String?
-   let image: String?
-   let name: String?
-   let content: String?
-   let price: String?
+   let id: String
+   let image: String
+   let name: String
+   let content: String
+   let price: String
    let weight: String?
    let spicy: String?
   }

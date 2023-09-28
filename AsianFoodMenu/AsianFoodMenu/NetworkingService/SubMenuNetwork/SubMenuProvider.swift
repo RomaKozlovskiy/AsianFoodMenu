@@ -12,7 +12,7 @@ class SubMenuProvider: Provider {
     private var subMenu: SubMenu?
     private let formBodyKey = "menuID"
     
-    func fetchSubMenu(withID id: String) async throws -> SubMenu? {
+    func fetchSubMenu(by id: String) async throws -> SubMenu? {
         let route = subMenuRouter.subMenuRoute()
         let data = try await self.request(withRoute: route, formBody: [formBodyKey: id])
         let subMenu = try self.decode(subMenu.self, data: data)
