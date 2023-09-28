@@ -9,19 +9,13 @@ import UIKit
 
 class MenuCollectionViewCell: UICollectionViewCell {
     
+    // MARK: - Static properties
+    
     static var reuseId: String {
         get {
             "MenuCollectionViewCell"
         }
     }
-    
-    // MARK: - Private properties
-    
-    private let menuProvider = MenuProvider()
-    
-    private lazy var menuImageView: UIImageView = _menuImageView
-    private lazy var foodNameLabel: UILabel = _foodName
-    private lazy var foodCountLabel: UILabel = _foodCount
     
     // MARK: - Override properties
     
@@ -35,6 +29,13 @@ class MenuCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    // MARK: - Private properties
+    
+    private let menuProvider = MenuProvider()
+    
+    private lazy var menuImageView: UIImageView = _menuImageView
+    private lazy var foodNameLabel: UILabel = _foodName
+    private lazy var foodCountLabel: UILabel = _foodCount
     
     // MARK: - init
     
@@ -78,7 +79,7 @@ class MenuCollectionViewCell: UICollectionViewCell {
     }
     
     private func applyConstraints() {
-    
+
         NSLayoutConstraint.activate([
             menuImageView.topAnchor.constraint(equalTo: topAnchor),
             menuImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -96,7 +97,7 @@ class MenuCollectionViewCell: UICollectionViewCell {
             
         ])
     }
-    
+        
     private func setImage(from menuList: MenuList) async -> UIImage? {
         do {
             let image = try await menuProvider.fetchFoodImage(from: menuList.image)

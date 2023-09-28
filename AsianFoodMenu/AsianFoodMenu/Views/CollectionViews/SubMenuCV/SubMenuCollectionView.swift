@@ -9,31 +9,37 @@ import UIKit
 
 class SubMenuCollectionView: UICollectionView {
 
+    // MARK: - Private properties
+    
     private let subMenuProvider = SubMenuProvider()
     private var subMenu: SubMenu?
+    
+    // MARK: - init
     
     init() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.minimumInteritemSpacing = Constants.subMenuMinimumLineSpacing
+        layout.minimumInteritemSpacing = ConstantsLayout.subMenuMinimumLineSpacing
         super.init(frame: .zero, collectionViewLayout: layout)
         
         setupSelf()
         contentInset = UIEdgeInsets(
             top: 0,
-            left: Constants.leftDistanceToView,
+            left: ConstantsLayout.leftDistanceToView,
             bottom: 0,
-            right: Constants.rightDistanceToView
+            right: ConstantsLayout.rightDistanceToView
         )
         showsHorizontalScrollIndicator = false
         showsVerticalScrollIndicator = false
-        contentInset = UIEdgeInsets(top: 10, left: Constants.leftDistanceToView, bottom: 30, right: Constants.rightDistanceToView)
+        contentInset = UIEdgeInsets(top: 10, left: ConstantsLayout.leftDistanceToView, bottom: 30, right: ConstantsLayout.rightDistanceToView)
     }
     
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Private Methods
     
     private func setupSelf() {
         backgroundColor = #colorLiteral(red: 0.1411764324, green: 0.1411764324, blue: 0.1411764324, alpha: 1)
@@ -72,7 +78,7 @@ extension SubMenuCollectionView: UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: Constants.subMenuItemWidth, height: Constants.subMenuItemWidth * 1.4)
+        CGSize(width: ConstantsLayout.subMenuItemWidth, height: ConstantsLayout.subMenuItemWidth * 1.4)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

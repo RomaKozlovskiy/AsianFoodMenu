@@ -176,7 +176,6 @@ private extension SubMenuCollectionViewCell {
         result.font = UIFont.boldSystemFont(ofSize: 12)
         result.textAlignment = .center
         result.numberOfLines = 2
-        //result.adjustsFontSizeToFitWidth = true // todo
         result.clipsToBounds = true
         result.translatesAutoresizingMaskIntoConstraints = false
         return result
@@ -208,10 +207,8 @@ private extension SubMenuCollectionViewCell {
         result.backgroundColor = #colorLiteral(red: 0.274024725, green: 0.3874692917, blue: 1, alpha: 1)
         result.layer.cornerRadius = 10
         result.addTarget(self, action: #selector(cartButton), for: .touchUpInside)
-        result.layer.zPosition = .greatestFiniteMagnitude
         result.clipsToBounds = true
         result.translatesAutoresizingMaskIntoConstraints = false
-       
         return result
     }
 }

@@ -7,6 +7,8 @@
 
 import UIKit
 
+// MARK: - Protocols
+
 protocol MenuCollectionViewDelegate: AnyObject {
     func fetchFoodName(from menu: Menu, at index: Int)
 }
@@ -16,6 +18,9 @@ protocol MenuCollectionViewSubMenuDelegate: AnyObject {
 }
 
 class MenuCollectionView: UICollectionView {
+    
+    // MARK: - weak Delegates properties
+    
     weak var menuDelegate: MenuCollectionViewDelegate?
     weak var subMenuDelegate: MenuCollectionViewSubMenuDelegate?
     
@@ -34,12 +39,12 @@ class MenuCollectionView: UICollectionView {
         super.init(frame: .zero, collectionViewLayout: layout)
         
         setupSelf()
-        layout.minimumLineSpacing = Constants.menuMinimumLineSpacing
+        layout.minimumLineSpacing = ConstantsLayout.menuMinimumLineSpacing
         contentInset = UIEdgeInsets(
             top: 0,
-            left: Constants.leftDistanceToView,
+            left: ConstantsLayout.leftDistanceToView,
             bottom: 0,
-            right: Constants.rightDistanceToView
+            right: ConstantsLayout.rightDistanceToView
         )
         showsHorizontalScrollIndicator = false
         showsVerticalScrollIndicator = false
@@ -108,7 +113,7 @@ extension MenuCollectionView: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: Constants.menuItemWidth, height: frame.height)
+        CGSize(width: ConstantsLayout.menuItemWidth, height: frame.height)
     }
 }
 

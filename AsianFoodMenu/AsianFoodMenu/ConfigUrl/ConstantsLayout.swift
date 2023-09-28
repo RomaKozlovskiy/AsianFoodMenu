@@ -6,17 +6,18 @@
 //
 
 import UIKit
-struct Constants {
+
+struct ConstantsLayout {
     static let leftDistanceToView: CGFloat = 20
     static let rightDistanceToView: CGFloat = 20
     
     //menu
     static let menuMinimumLineSpacing: CGFloat = 10
-    static let menuItemWidth = (UIScreen.main.bounds.width - Constants.leftDistanceToView - Constants.rightDistanceToView - (Constants.menuMinimumLineSpacing / 3)) / 3
+    static let menuItemWidth = (UIScreen.main.bounds.width - ConstantsLayout.leftDistanceToView - ConstantsLayout.rightDistanceToView - (ConstantsLayout.menuMinimumLineSpacing / 3)) / 3
     
     //submenu
     static let subMenuMinimumLineSpacing: CGFloat = 20
-    static let subMenuItemWidth = (UIScreen.main.bounds.width - Constants.leftDistanceToView - Constants.rightDistanceToView - Constants.subMenuMinimumLineSpacing) / 2
+    static let subMenuItemWidth = (UIScreen.main.bounds.width - ConstantsLayout.leftDistanceToView - ConstantsLayout.rightDistanceToView - ConstantsLayout.subMenuMinimumLineSpacing) / 2
     static let subMenuCellCount = UIScreen.main.bounds.width / subMenuItemWidth
     static let margin = subMenuMinimumLineSpacing * 2
 }

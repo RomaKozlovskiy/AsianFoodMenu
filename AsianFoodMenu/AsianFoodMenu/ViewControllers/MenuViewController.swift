@@ -9,9 +9,13 @@ import UIKit
 
 class MenuViewController: UIViewController {
     
+    // MARK: - Private properties
+    
     private let menuCollectionView = MenuCollectionView()
     private let subMenuCollectionView = SubMenuCollectionView()
     private lazy var foodNameLabel: UILabel = _foodNameLabel
+    
+    // MARK: - View LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,8 +43,8 @@ class MenuViewController: UIViewController {
             menuCollectionView.heightAnchor.constraint(equalToConstant: 150),
             
             foodNameLabel.topAnchor.constraint(equalTo: menuCollectionView.bottomAnchor, constant: 20),
-            foodNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.leftDistanceToView),
-            foodNameLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.rightDistanceToView),
+            foodNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: ConstantsLayout.leftDistanceToView),
+            foodNameLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -ConstantsLayout.rightDistanceToView),
             
             subMenuCollectionView.topAnchor.constraint(equalTo: foodNameLabel.bottomAnchor, constant: 5),
             subMenuCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -67,6 +71,8 @@ class MenuViewController: UIViewController {
         print(#function)
     }
 }
+
+// MARK: - Extensions
 
 private extension MenuViewController {
     var _foodNameLabel: UILabel {
