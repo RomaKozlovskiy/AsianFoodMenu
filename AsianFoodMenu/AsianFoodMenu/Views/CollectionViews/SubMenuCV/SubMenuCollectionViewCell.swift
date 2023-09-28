@@ -84,14 +84,14 @@ class SubMenuCollectionViewCell: UICollectionViewCell {
             subMenuImageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 1/2),
             
             foodNameTitle.topAnchor.constraint(equalTo: topAnchor, constant: 15),
-            foodNameTitle.leadingAnchor.constraint(equalTo: leadingAnchor),
-            foodNameTitle.trailingAnchor.constraint(equalTo: trailingAnchor),
+            foodNameTitle.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
+            foodNameTitle.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
             
             foodNameSubtitle.topAnchor.constraint(equalTo: foodNameTitle.bottomAnchor, constant: 5),
-            foodNameSubtitle.leadingAnchor.constraint(equalTo: leadingAnchor),
-            foodNameSubtitle.trailingAnchor.constraint(equalTo: trailingAnchor),
+            foodNameSubtitle.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
+            foodNameSubtitle.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
             
-            foodPrice.bottomAnchor.constraint(equalTo: subMenuImageView.topAnchor, constant: -15),
+            foodPrice.bottomAnchor.constraint(equalTo: subMenuImageView.topAnchor, constant: -10),
             foodPrice.leadingAnchor.constraint(equalTo: leadingAnchor),
             foodPrice.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
             foodPrice.heightAnchor.constraint(equalToConstant: 20),
@@ -161,8 +161,10 @@ private extension SubMenuCollectionViewCell {
     var _foodNameTitle: UILabel {
         let result = UILabel()
         result.textColor = .white
-        result.font = UIFont.boldSystemFont(ofSize: 20)
+        result.font = UIFont.boldSystemFont(ofSize: 18)
         result.textAlignment = .center
+        result.numberOfLines = 2
+        result.adjustsFontSizeToFitWidth = true
         result.clipsToBounds = true
         result.translatesAutoresizingMaskIntoConstraints = false
         return result
@@ -171,8 +173,10 @@ private extension SubMenuCollectionViewCell {
     var _foodNameSubtitle: UILabel {
         let result = UILabel()
         result.textColor = #colorLiteral(red: 0.5520539284, green: 0.5570270419, blue: 0.5569393635, alpha: 1)
-        result.font = UIFont.boldSystemFont(ofSize: 14)
+        result.font = UIFont.boldSystemFont(ofSize: 12)
         result.textAlignment = .center
+        result.numberOfLines = 2
+        //result.adjustsFontSizeToFitWidth = true // todo
         result.clipsToBounds = true
         result.translatesAutoresizingMaskIntoConstraints = false
         return result
