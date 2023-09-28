@@ -50,7 +50,7 @@ class SubMenuCollectionViewCell: UICollectionViewCell {
             }
             foodNameTitle.text = subMenuList.name
             foodNameSubtitle.text = subMenuList.content
-            foodPrice.text = subMenuList.price
+            foodPrice.attributedText = formatted(with: subMenuList.price, and: subMenuList.weight)
             if subMenuList.spicy != nil {
                 spicyImageView.isHidden = false
             } else {
@@ -119,6 +119,26 @@ class SubMenuCollectionViewCell: UICollectionViewCell {
         return nil
     }
   
+    private func formatted(with price: String?, and weight: String?) -> NSAttributedString {
+        
+        let rootString = NSMutableAttributedString()
+        
+        let priceAttributes: [NSAttributedString.Key: Any] = [.font: UIFont.boldSystemFont(ofSize: 20), .foregroundColor: UIColor.white]
+        let weightAttributes: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: 15), .foregroundColor: UIColor.gray]
+        
+        let doublePrice = Double(price ?? "")
+        let strRoundedPice = String(format: "%.f", doublePrice ?? 0)
+        
+        let price = NSMutableAttributedString(string: strRoundedPice + " ₽ ", attributes: priceAttributes)
+        rootString.append(price)
+        
+        if weight != nil {
+            let weight = NSMutableAttributedString(string: "/ \(weight ?? "0").", attributes: weightAttributes)
+            rootString.append(weight)
+        }
+        return rootString
+    }
+    
     @objc private func cartButton() {
         print(#function)
     }
@@ -130,11 +150,8 @@ class SubMenuCollectionViewCell: UICollectionViewCell {
 private extension SubMenuCollectionViewCell {
     var _subMenuImageView : UIImageView {
         let result = UIImageView()
-        result.backgroundColor = .yellow
         result.contentMode = .scaleAspectFill
-        result.image = UIImage(named: "logo")
         result.clipsToBounds = true
-       // result.layer.masksToBounds = false
         result.layer.cornerRadius = 10
         result.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         result.translatesAutoresizingMaskIntoConstraints = false
@@ -144,7 +161,6 @@ private extension SubMenuCollectionViewCell {
     var _foodNameTitle: UILabel {
         let result = UILabel()
         result.textColor = .white
-        result.text = "Магура"
         result.font = UIFont.boldSystemFont(ofSize: 20)
         result.textAlignment = .center
         result.clipsToBounds = true
@@ -155,7 +171,6 @@ private extension SubMenuCollectionViewCell {
     var _foodNameSubtitle: UILabel {
         let result = UILabel()
         result.textColor = #colorLiteral(red: 0.5520539284, green: 0.5570270419, blue: 0.5569393635, alpha: 1)
-        result.text = "Тунец"
         result.font = UIFont.boldSystemFont(ofSize: 14)
         result.textAlignment = .center
         result.clipsToBounds = true
@@ -167,7 +182,6 @@ private extension SubMenuCollectionViewCell {
         let result = UILabel()
         result.textColor = .white
         result.textAlignment = .center
-        result.text = "100 р / 50 г."
         result.font = UIFont.boldSystemFont(ofSize: 18)
         result.textAlignment = .center
         result.clipsToBounds = true
