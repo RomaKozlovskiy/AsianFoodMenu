@@ -20,9 +20,11 @@ class MenuCollectionView: UICollectionView {
     weak var subMenuDelegate: MenuCollectionViewSubMenuDelegate?
     
     // MARK: - Private properties
-    let subMenuCV = SubMenuCollectionView()
     private let menuProvider = MenuProvider()
     private var menu: Menu?
+    
+    //logical properties
+    private var currentIndexPath: Int = 0
     
     // MARK: - init
     
@@ -96,9 +98,13 @@ extension MenuCollectionView: UICollectionViewDelegate, UICollectionViewDataSour
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let menu = menu else { return }
-        subMenuDelegate?.fetchSubMenu(from: menu, at: indexPath.row)
-        menuDelegate?.fetchFoodName(from: menu, at: indexPath.row)
+        if currentIndexPath != indexPath.row {
+            guard let menu = menu else { return }
+            subMenuDelegate?.fetchSubMenu(from: menu, at: indexPath.row)
+            menuDelegate?.fetchFoodName(from: menu, at: indexPath.row)
+        }
+        
+        currentIndexPath = indexPath.row
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
