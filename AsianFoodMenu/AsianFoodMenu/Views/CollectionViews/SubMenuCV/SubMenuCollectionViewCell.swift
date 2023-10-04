@@ -25,6 +25,7 @@ class SubMenuCollectionViewCell: UICollectionViewCell {
     private lazy var foodPrice: UILabel = _foodPrice
     private lazy var spicyImageView: UIImageView = _spicyImageView
     private lazy var addToCartButton: UIButton = _addToCartButton
+    private lazy var subMenuActivityIndicator: UIActivityIndicatorView = _subMenuActivityIndicator
     
     // MARK: - init
     
@@ -40,13 +41,26 @@ class SubMenuCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    // MARK: - Public properties
+    
+    // MARK: - Override Methods
+    
+    override func prepareForReuse() {
+        subMenuImageView.image = nil
+        foodNameTitle.text = nil
+        foodNameSubtitle.text = nil
+        foodPrice.text = nil
+        spicyImageView.image = nil
+    }
+    
+    // MARK: - Public Methods
     
     func setupWith(subMenuList: SubMenuList) {
+        subMenuActivityIndicator.startAnimating()
         Task {
             let image = await setImage(from: subMenuList)
             await MainActor.run{
                 subMenuImageView.image = image
+                subMenuActivityIndicator.stopAnimating()
             }
             foodNameTitle.text = subMenuList.name
             foodNameSubtitle.text = subMenuList.content
@@ -74,6 +88,7 @@ class SubMenuCollectionViewCell: UICollectionViewCell {
         addSubview(foodPrice)
         addSubview(spicyImageView)
         addSubview(addToCartButton)
+        addSubview(subMenuActivityIndicator)
     }
     
     private func applyConstraints() {
@@ -104,7 +119,11 @@ class SubMenuCollectionViewCell: UICollectionViewCell {
             addToCartButton.topAnchor.constraint(equalTo: bottomAnchor, constant: -25),
             addToCartButton.heightAnchor.constraint(equalToConstant: 50),
             addToCartButton.widthAnchor.constraint(equalToConstant: frame.width - 30),
-            addToCartButton.centerXAnchor.constraint(equalTo: centerXAnchor)
+            addToCartButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+            
+            subMenuActivityIndicator.centerXAnchor.constraint(equalTo: subMenuImageView.centerXAnchor),
+            subMenuActivityIndicator.centerYAnchor.constraint(equalTo: subMenuImageView.centerYAnchor)
+            
         ])
     }
     
@@ -208,6 +227,14 @@ private extension SubMenuCollectionViewCell {
         result.layer.cornerRadius = 10
         result.addTarget(self, action: #selector(cartButton), for: .touchUpInside)
         result.clipsToBounds = true
+        result.translatesAutoresizingMaskIntoConstraints = false
+        return result
+    }
+    
+    var _subMenuActivityIndicator: UIActivityIndicatorView {
+        let result = UIActivityIndicatorView()
+        result.style = .large
+        result.color = .white
         result.translatesAutoresizingMaskIntoConstraints = false
         return result
     }
