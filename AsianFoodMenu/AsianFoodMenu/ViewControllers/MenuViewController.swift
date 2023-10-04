@@ -19,7 +19,9 @@ class MenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.backgroundColor = #colorLiteral(red: 0.1411764324, green: 0.1411764324, blue: 0.1411764324, alpha: 1)
+        
         addSubviews()
         applyConstraints()
         setupNavigationItem()
@@ -72,7 +74,7 @@ class MenuViewController: UIViewController {
     }
 }
 
-// MARK: - Extensions
+// MARK: - Private Extensions
 
 private extension MenuViewController {
     var _foodNameLabel: UILabel {
@@ -85,6 +87,8 @@ private extension MenuViewController {
         return result
     }
 }
+
+// MARK: - MenuCollectionViewDelegate
 
 extension MenuViewController: MenuCollectionViewDelegate {
     func fetchFoodName(from menu: Menu, at index: Int) {

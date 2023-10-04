@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 struct Menu: Decodable {
     let status: Bool
     let menuList: [MenuList]

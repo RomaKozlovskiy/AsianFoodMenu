@@ -8,6 +8,7 @@
 import Foundation
 
 class MenuProvider: Provider {
+    
     private let menuRouter = MenuRouter()
     private var menu: Menu?
     

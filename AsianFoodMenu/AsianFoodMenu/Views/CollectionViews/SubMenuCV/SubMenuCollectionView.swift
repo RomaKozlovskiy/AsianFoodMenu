@@ -9,7 +9,7 @@ import UIKit
 
 class SubMenuCollectionView: UICollectionView {
 
-    // MARK: - Private properties
+    // MARK: - Private Properties
     
     private let subMenuProvider = SubMenuProvider()
     private var subMenu: SubMenu?
@@ -23,17 +23,19 @@ class SubMenuCollectionView: UICollectionView {
         super.init(frame: .zero, collectionViewLayout: layout)
         
         setupSelf()
+        
         contentInset = UIEdgeInsets(
             top: 0,
             left: ConstantsLayout.leftDistanceToView,
             bottom: 0,
             right: ConstantsLayout.rightDistanceToView
         )
+        
         showsHorizontalScrollIndicator = false
         showsVerticalScrollIndicator = false
+        
         contentInset = UIEdgeInsets(top: 10, left: ConstantsLayout.leftDistanceToView, bottom: 30, right: ConstantsLayout.rightDistanceToView)
     }
-    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -58,12 +60,12 @@ class SubMenuCollectionView: UICollectionView {
             print(error.localizedDescription)
         }
     }
-
 }
 
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 
 extension SubMenuCollectionView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         subMenu?.menuList.count ?? 0
     }
@@ -86,11 +88,12 @@ extension SubMenuCollectionView: UICollectionViewDelegate, UICollectionViewDataS
     }
 }
 
+// MARK: - MenuCollectionViewSubMenuDelegate
+
 extension SubMenuCollectionView: MenuCollectionViewSubMenuDelegate {
 
     func fetchSubMenu(from menu: Menu, at index: Int) {
         let id = menu.menuList[index].menuID
-        print(id)
         Task {
             await fetchSubMenu(by: id)
         }

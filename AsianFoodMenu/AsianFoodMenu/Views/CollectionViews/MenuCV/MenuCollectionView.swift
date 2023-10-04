@@ -24,7 +24,8 @@ class MenuCollectionView: UICollectionView {
     weak var menuDelegate: MenuCollectionViewDelegate?
     weak var subMenuDelegate: MenuCollectionViewSubMenuDelegate?
     
-    // MARK: - Private properties
+    // MARK: - Private Properties
+    
     private let menuProvider = MenuProvider()
     private var menu: Menu?
     
@@ -39,6 +40,7 @@ class MenuCollectionView: UICollectionView {
         super.init(frame: .zero, collectionViewLayout: layout)
         
         setupSelf()
+        
         layout.minimumLineSpacing = ConstantsLayout.menuMinimumLineSpacing
         contentInset = UIEdgeInsets(
             top: 0,
@@ -46,6 +48,7 @@ class MenuCollectionView: UICollectionView {
             bottom: 0,
             right: ConstantsLayout.rightDistanceToView
         )
+        
         showsHorizontalScrollIndicator = false
         showsVerticalScrollIndicator = false
         
@@ -102,6 +105,7 @@ extension MenuCollectionView: UICollectionViewDelegate, UICollectionViewDataSour
         }
         return cell
     }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if currentIndexPath != indexPath.row {
             guard let menu = menu else { return }

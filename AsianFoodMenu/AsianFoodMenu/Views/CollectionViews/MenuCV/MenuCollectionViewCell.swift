@@ -9,7 +9,7 @@ import UIKit
 
 class MenuCollectionViewCell: UICollectionViewCell {
     
-    // MARK: - Static properties
+    // MARK: - Static Properties
     
     static var reuseId: String {
         get {
@@ -17,7 +17,7 @@ class MenuCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    // MARK: - Override properties
+    // MARK: - Override Properties
     
     override var isSelected: Bool {
         didSet {
@@ -29,7 +29,7 @@ class MenuCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    // MARK: - Private properties
+    // MARK: - Private Properties
     
     private let menuProvider = MenuProvider()
     
@@ -51,7 +51,7 @@ class MenuCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Public properties
+    // MARK: - Public Methods
     
     func setupWith(menuList: MenuList) {
         Task {
@@ -60,6 +60,7 @@ class MenuCollectionViewCell: UICollectionViewCell {
                 menuImageView.image = image
             }
         }
+        
         foodNameLabel.text = menuList.name
         foodCountLabel.text = "\(menuList.subMenuCount) товаров"
     }
@@ -79,7 +80,6 @@ class MenuCollectionViewCell: UICollectionViewCell {
     }
     
     private func applyConstraints() {
-
         NSLayoutConstraint.activate([
             menuImageView.topAnchor.constraint(equalTo: topAnchor),
             menuImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -94,7 +94,6 @@ class MenuCollectionViewCell: UICollectionViewCell {
             foodCountLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             foodCountLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
             foodCountLabel.topAnchor.constraint(equalTo: foodNameLabel.bottomAnchor)
-            
         ])
     }
         
@@ -109,7 +108,7 @@ class MenuCollectionViewCell: UICollectionViewCell {
     }
 }
 
-// MARK: - Private extension MenuCollectionViewCell
+// MARK: - Private Extension
 
 private extension MenuCollectionViewCell {
     

@@ -9,13 +9,15 @@ import UIKit
 
 class SubMenuCollectionViewCell: UICollectionViewCell {
     
+    // MARK: - Static Properties
+    
     static var reuseID: String {
         get {
             "SubMenuCollectionViewCell"
         }
     }
     
-    // MARK: - Private lazy properties
+    // MARK: - Private Properties
     
     private let subMenuProvider = SubMenuProvider()
     
@@ -35,7 +37,6 @@ class SubMenuCollectionViewCell: UICollectionViewCell {
         configureSelf()
         addSubviews()
         applyConstraints()
-       
     }
     
     required init?(coder: NSCoder) {
@@ -56,15 +57,18 @@ class SubMenuCollectionViewCell: UICollectionViewCell {
     
     func setupWith(subMenuList: SubMenuList) {
         subMenuActivityIndicator.startAnimating()
+        
         Task {
             let image = await setImage(from: subMenuList)
             await MainActor.run{
                 subMenuImageView.image = image
                 subMenuActivityIndicator.stopAnimating()
             }
+            
             foodNameTitle.text = subMenuList.name
             foodNameSubtitle.text = subMenuList.content
             foodPrice.attributedText = formatted(with: subMenuList.price, and: subMenuList.weight)
+            
             if subMenuList.spicy != nil {
                 spicyImageView.isHidden = false
             } else {
@@ -123,7 +127,6 @@ class SubMenuCollectionViewCell: UICollectionViewCell {
             
             subMenuActivityIndicator.centerXAnchor.constraint(equalTo: subMenuImageView.centerXAnchor),
             subMenuActivityIndicator.centerYAnchor.constraint(equalTo: subMenuImageView.centerYAnchor)
-            
         ])
     }
     
@@ -161,10 +164,9 @@ class SubMenuCollectionViewCell: UICollectionViewCell {
     @objc private func cartButton() {
         print(#function)
     }
-
 }
 
-// MARK: - Private extension
+// MARK: - Private Extension
 
 private extension SubMenuCollectionViewCell {
     var _subMenuImageView : UIImageView {

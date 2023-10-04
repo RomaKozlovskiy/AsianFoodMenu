@@ -8,6 +8,7 @@
 import Foundation
 
 class SubMenuRouter: ApiRouterProtocol {
+    
     func subMenuRoute() -> ApiRoute {
         var baseRoute = self.apiRoute()
         baseRoute.method = .post
